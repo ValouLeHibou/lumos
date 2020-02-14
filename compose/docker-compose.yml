@@ -1,0 +1,21 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+     - /home/valentin/Documents/git/lumos/compose/dockerVolume:/var/lib/mysql
+    restart: on-failure
+    build: .
+    container_name: my_mysql
+  admin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+    - "8081:80"
+    links:
+      - mysql:db
+    build: .
+    container_name: myadmin

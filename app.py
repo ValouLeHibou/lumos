@@ -1,9 +1,8 @@
 from flask import Flask
 from flask import render_template
 import pymysql
-import quickstart
 
-con = pymysql.connect('localhost', 'valentin', 'root', 'test_db', 3306)
+con = pymysql.connect('localhost', 'valentin', 'root', 'lumos', 3306)
 with con:
     cur = con.cursor()
     cur.execute("SELECT * FROM user")
@@ -14,10 +13,9 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():
+def main():
     return render_template('index.html')
 
 
 if __name__ == '__main__':
-    app.run()
-
+    app.run(debug=True)
